@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_centerInParent="true"
+    android:background="@drawable/shape_dialog_bg"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="页面加载进度"
+        android:layout_margin="10dp"
+        android:textColor="#9a9b98"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_below="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ProgressBar
+            android:id="@+id/pb_load"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/error_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/wran"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_load_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#9a9b98"
+        android:text="测试"
+        android:textSize="16sp"
+        android:layout_marginLeft="24dp"
+        android:layout_alignTop="@+id/content"
+        android:layout_toRightOf="@+id/content"
+        android:layout_marginTop="22dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#00000000"
+        android:textColor="#9a9b98"
+        android:text="取消"
+        android:layout_below="@+id/content"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/cancel" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#00000000"
+        android:textColor="#9a9b98"
+        android:text="确定"
+        android:layout_below="@+id/content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:id="@+id/submit" />
+</RelativeLayout>

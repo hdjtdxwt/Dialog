@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#fff</color>
+
+    <color name="colorBlack">#363636</color>
+    <color name="colorGray">#E4E4E4</color>
+    <color name="color_textblack">#616161</color>
+    <color name="color_border">#50CAD6</color>
+    <color name="color_textgray">#9B9B9B</color>
+    <color name="white">#ffffff</color>
+
+    <color name="trans_gray">#66666666</color>
+    <!--退出颜色会有全白ffffff变成c0c0c0-->
+    <color name="white_gray">#f9c0c0c0</color>
+    <color name="color_btnfill">#26C2CF</color>
+
+    <!--点击后，正在登录请求,颜色要要由color_btnfill变成color_btnenable-->
+    <color name="color_btnenable">#76C2CF</color>
+    <color name="color_btnunable">#616161</color>
+    <color name="red">#CE6B6A</color>
+    <color name="unused_textcolor">#4c5d6d</color>
+
+    <color name="list_text_color">#11c0f1</color>
+    <color name="list_bian_color">#1f709a</color>
+
+    <color name="lightGreen">#00c7b7</color>
+    <color name="black">#000000</color>
+    <color name="lightgray">#f2f2f2</color>
+</resources>
