@@ -15,6 +15,7 @@ import com.arialyy.annotations.Download;
 import com.arialyy.aria.core.Aria;
 import com.arialyy.aria.core.download.DownloadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -46,6 +47,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stop.setOnClickListener(this);
         Aria.download(this).register();
 
+        /*url = "http://download.epsit.cn:8088/img/userfiles/1/mapimg/knowledge/knowledgeMapLine/2018/06/F1%E9%97%A8%E8%AF%8A%E4%BE%BF%E6%B0%91%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83.png";
+        totalCount=1;
+        String realNameUrl = java.net.URLDecoder.decode(url);
+        String realName = getFileNameFromUrl(realNameUrl);
+        Log.e(TAG,"名字："+realName);
+        Aria.download(this).load(url)     //读取下载地址
+                .setFilePath(path+"/epsit/file/"+realName) //设置文件保存的完整路径
+                .start();   //启动下载*/
+
         loadData();
     }
     public void loadData(){
@@ -59,31 +69,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 stringBuffer.append(new String(b,0,count));
             }
             MapLoadResponse response = JSON.parseObject(stringBuffer.toString(),MapLoadResponse.class);
-            List<MapImgData> list = response.getData();
+            final List<MapImgData> list = response.getData();
+            totalCount = list!=null ? list.size():0;
             Log.e(TAG,"加载数据成功-->ok啦");
-            startDownload(list);
+            if(list!=null){
+                new Thread(){
+                    @Override
+                    public void run() {
+                        startDownload(list);
+                    }
+                }.start();
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*Aria.download(this).load(url)     //读取下载地址
-                .setFilePath(path+"/epsit/file/face_image_77.png") //设置文件保存的完整路径
-                .start();   //启动下载*/
     }
 
     private void startDownload(List<MapImgData> list) {
-        if(list==null){
-            totalCount=0;
-            return;
-        }
-        totalCount = list.size();
+        Log.e(TAG,"totalCount="+totalCount);
         for(int i=0;i<list.size();i++){
             String url = list.get(i).getUrl();
             String realName = getFileNameFromUrl(url);
             if(!TextUtils.isEmpty(realName)){
+                String savePath = path+"/epsit/file/"+realName;
+                File saveFile = new File(savePath);
+                if(saveFile.exists()){
+                    saveFile.delete();
+                }
+                Log.e(TAG,"开始下载---1");
                 Aria.download(this).load(url)     //读取下载地址
-                        .setFilePath(path+"/epsit/file/"+realName) //设置文件保存的完整路径
+                        .setFilePath(saveFile.getAbsolutePath()) //设置文件保存的完整路径
                         .start();   //启动下载*/
             }else{
+                Log.e(TAG,"开始下载---2");
                 Aria.download(this).load(url)     //读取下载地址
                         .setFilePath(path+"/epsit/file/"+ UUID.randomUUID()+".jpg") //设置文件保存的完整路径
                         .start();   //启动下载*/
@@ -91,16 +111,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     public String getFileNameFromUrl(String url){
-
         if(TextUtils.isEmpty(url)){
             return "";
         }else{
             String realNameUrl = java.net.URLDecoder.decode(url);
+            Log.e(TAG,"realNameUrl="+realNameUrl);
             int index = realNameUrl.lastIndexOf("/");
-            return url.substring(index,realNameUrl.length());
+            return realNameUrl.substring(index+1,realNameUrl.length());
         }
     }
     public void updateProgress(){
+        Log.e(TAG,"updateProgress-->"+totalCount);
         if(totalCount>0){
             float progress = (successedCount+failedCount)*1.0f / totalCount;
             int intProgress = (int)progress*100;
@@ -129,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Download.onTaskComplete
     void taskComplete(DownloadTask task) {
         //在这里处理任务完成的状态
-        Log.e(TAG,task.getKey()+" 完成了！ "+task.getPercent());
+        Log.e(TAG,task.getKey()+" 完成了！ "+task.getPercent()+"  "+Thread.currentThread().getName());
         successedCount++;
         updateProgress();
     }

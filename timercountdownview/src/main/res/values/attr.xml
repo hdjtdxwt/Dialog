@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressView">
+        <attr name="outer_layer_solide_color" format="color" />
+        <attr name="outer_layer_stroke_color" format="color" />
+        <attr name="outer_layer_stroke_width" format="dimension" />
+        <attr name="midlle_layer_bg_color" format="color" />
+        <attr name="midlle_layer_progress_color" format="color" />
+        <attr name="midlle_layer_progress_width" format="dimension" />
+        <attr name="midlle_layer_small_circle_solide_color" format="color" />
+        <attr name="midlle_layer_small_circle_stroke_color" format="color" />
+        <attr name="midlle_layer_small_circle_size" format="dimension" />
+        <attr name="midlle_layer_small_circle_stroke_width" format="dimension" />
+        <attr name="shadow_layer_color" format="color" />
+        <attr name="shadow_layer_inner_color" format="color" />
+        <attr name="inner_text_size" format="dimension" />
+        <attr name="inner_text_color" format="color" />
+    </declare-styleable>
+    <!--圆弧进度条-->
+    <declare-styleable name="TasksCompletedView">
+        <attr name="radius" format="dimension" />
+        <attr name="totalProgress" format="integer" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="ringColor" format="color" />
+        <attr name="ringBgColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomView">
+        <attr name="cv_progress" format="integer" />
+        <attr name="cv_textColor" format="integer" />
+        <attr name="cv_radius" format="dimension" />
+        <attr name="cv_circleColor" format="color" />
+        <attr name="cv_ringColor" format="color" />
+        <attr name="cv_text_size" format="dimension" />
+    </declare-styleable>
+</resources>
